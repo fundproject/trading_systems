@@ -2,21 +2,6 @@ import datetime
 from vnpy.app.script_trader import init_cli_trading
 from vnpy.gateway.uft import UftGateway
 from time import sleep
-from vnpy.trader.constant import Direction, Offset, OrderType, Interval
-from vnpy.trader.object import (
-    OrderRequest,
-    HistoryRequest,
-    SubscribeRequest,
-    TickData,
-    OrderData,
-    TradeData,
-    PositionData,
-    AccountData,
-    ContractData,
-    LogData,
-    BarData
-)
-from vnpy.trader.utility import load_json
 import os
 import rpyc
 from rpyc.utils.server import ThreadedServer
@@ -65,17 +50,6 @@ class TradingSystem():
                         f = open(fullname, 'w')
                         f.write(today_tick)
                         f.close()
-
-                        # if self.engine.get_df(symbol) is not None:
-                        #     df = self.engine.get_df(symbol)
-                        #     df = df.drop_duplicates(keep='first')
-                        #     # engine.reset_df(symbol, df)
-                        #     outdir = 'C:/data/{}'.format(symbol)
-                        #     outname = symbol + "_" + datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
-                        #     if not os.path.exists(outdir):
-                        #         os.makedirs(outdir)
-                        #     fullname = os.path.join(outdir, outname)
-                        #     df.to_csv(fullname)
 
                     print("log ticks")
                     # log trades
