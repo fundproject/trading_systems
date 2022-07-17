@@ -1,6 +1,9 @@
 from pytz import timezone
 
-env = 'stage'  # 系统运行环境， 'stage' 模拟环境 ， 'prod' 实盘环境
+# 系统运行环境， 'stage' 模拟环境 ， 'prod' 实盘环境
+env = "prod"
+with open(r'C:/trading_systems/config/env.txt', 'r') as file:
+    env = file.read().rstrip()
 
 running_strategies = ["strategy_wrapper2.py"]  # strategies (wrapper) to be started
 

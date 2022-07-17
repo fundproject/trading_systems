@@ -10,7 +10,7 @@ import datetime
 
 from config import app_config
 from config import log_config
-from log_utils.logging import log_trades, log_orders, log_positions
+from log_utils.logging_utils import log_trades, log_orders, log_positions, log_ticks
 
 
 class TradingSystem():
@@ -36,22 +36,8 @@ class TradingSystem():
             if datetime.datetime.now().time() > datetime.time(15, 35, 0):
                 for key, value in self.engine.strategy_object.items():
                     # for each strategy
-                    symbols = value.universe
-                    symbols.append("510050.SSE")
-                    for symbol in symbols:
-                        result = [str(a) for a in self.engine.main_engine.get_engine("oms").list if
-                                  a.vt_symbol == symbol]
-                        today_tick = "\n".join(result)
-                        outdir = 'C:/data/{}'.format(symbol)
-                        outname = symbol + "_" + datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
-                        if not os.path.exists(outdir):
-                            os.makedirs(outdir)
-                        fullname = os.path.join(outdir, outname)
-                        f = open(fullname, 'w')
-                        f.write(today_tick)
-                        f.close()
-
-                    print("log ticks")
+                    #log ticks
+                    log_ticks(log_config.tick_log_path, self.engine)
                     # log trades
                     log_trades(log_config.trade_log_path, self.engine)
                     # log orders
