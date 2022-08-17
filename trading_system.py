@@ -43,7 +43,7 @@ class TradingSystem():
                     # log orders
                     log_orders(log_config.order_log_path, self.engine)
                     # log positions
-                    log_positions(log_config.position_log_path.env, self.engine)
+                    log_positions(log_config.position_log_path, self.engine)
 
                     self.engine.close()
                     exit(0)

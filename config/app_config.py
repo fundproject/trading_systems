@@ -6,6 +6,9 @@ with open(r'C:/trading_systems/config/env.txt', 'r') as file:
     env = file.read().rstrip()
 
 running_strategies = ["strategy_wrapper2.py"]  # strategies (wrapper) to be started
+# running_strategies = ["butterfly_spread_wrapper.py"]
+# running_strategies = ["doublesell_wrapper.py"]
+# running_strategies = ["strategy_wrapper2.py", "butterfly_spread_wrapper.py", "doublesell_wrapper.py"]
 
 prod_setting = {
     "用户名": "300819000012",
@@ -32,7 +35,7 @@ stage_setting = {
 
 setting_map = {'prod': prod_setting, 'stage': stage_setting}
 DB_TZ = timezone("Asia/Shanghai")
-rpc_port_map = {'prod': 18819, 'stage': 18820}
+rpc_port_map = {'prod': 18818, 'stage': 18820}
 system_configs = {
     "trading_min_interval": 1,  # 轮询间隔
     "cooldown": 5,  # 两次交易之间的冷却时间

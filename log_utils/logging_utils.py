@@ -43,7 +43,8 @@ def log_positions(outdir, engine):
     print('log positions')
 
 def log_ticks(outdir, engine):
-    symbols = engine.universe
+    symbols = []
+    # symbols = engine.universe
     symbols.append("510050.SSE")
     for symbol in symbols:
         result = [str(a) for a in engine.main_engine.get_engine("oms").list if
