@@ -84,11 +84,14 @@ class TradingSystem():
                 req = order.create_cancel_request()
                 self.engine.main_engine.cancel_order(req, order.gateway_name)
         # reset account position to strategy position
-        for key, value in self.engine.strategy_object.items():
-            print("reset position for ", key)
-            for symbol in value.position.index:
-                value.set_position(symbol, value.position[symbol])
-                print("reset position of ", symbol, "to :", value.position[symbol])
+        # for key, value in self.engine.strategy_object.items():
+        #     print("reset position for ", key)
+        #     for symbol in value.position.index:
+        #         value.set_position(symbol, value.position[symbol])
+        #         print("reset position of ", symbol, "to :", value.position[symbol])
+
+        # manually call merge_and_trade for reset position
+        self.engine.merge_and_trade()
 
 
 class MyService(rpyc.Service):
