@@ -68,7 +68,7 @@ class TradingSystem():
     @staticmethod
     def save_volume(strategy):
         for key, path in strategy.lastest_tick_path_dict.items():
-            if key is 'option':
+            if key is 'subject':
                 last_tick = strategy.lastest_tick[key]
                 if last_tick is not None:
                     symbols = "date," + ','.join(list(last_tick.index.values))
