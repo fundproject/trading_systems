@@ -2,8 +2,8 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
-df = pd.read_csv("C:\\data\\backtest_position\\position20220812.csv",header=0)
-with open("C:\\data\\position_log\\prod\\2022-08-12.csv", 'r') as file_object:
+df = pd.read_csv("C:\\data\\backtest_position\\Option_LongShort_Factor20220908.csv",header=0)
+with open("C:\\data\\position_log\\prod\\2022-09-08.csv", 'r') as file_object:
     strategy_position = file_object.readlines()
     for line in strategy_position:
         timestamp = str(line).split("@")[1].strip()

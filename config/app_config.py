@@ -9,6 +9,7 @@ running_strategies = ["strategy_wrapper2.py"]  # strategies (wrapper) to be star
 # running_strategies = ["butterfly_spread_wrapper.py"]
 # running_strategies = ["doublesell_wrapper.py"]
 # running_strategies = ["strategy_wrapper2.py", "butterfly_spread_wrapper.py", "doublesell_wrapper.py"]
+# running_strategies = ["option_factor_wrapper.py"]
 
 prod_setting = {
     "用户名": "300819000012",
