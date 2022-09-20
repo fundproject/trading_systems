@@ -18,12 +18,16 @@ from log_utils.logging_utils import log_trades, log_orders, log_positions, log_t
 
 class TradingSystem():
     env = app_config.env
-    setting = app_config.setting_map.get(env)
+    uft_setting = app_config.setting_map.get('uft_'+env)
+    ctp_setting = app_config.setting_map.get('ctp_'+env)
+
     system_configs = app_config.system_configs
 
     def run(self, strategies):
         self.engine = init_cli_trading([UftGateway])
-        self.engine.connect_gateway(self.setting, "UFT")
+        self.engine.connect_gateway(self.uft_setting, "UFT")
+        # self.engine.connect_gateway(self.ctp_setting, "CTP")
+
         sleep(10)
         for strategy in strategies:
             self.engine.start_strategy(strategy)

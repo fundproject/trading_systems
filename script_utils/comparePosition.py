@@ -10,7 +10,7 @@ with open("C:\\data\\position_log\\prod\\2022-09-08.csv", 'r') as file_object:
         pos = eval((str(line)).split("@")[0])
         total = 0
         error = 0
-        for strategy,positions in pos.items():
+        for strategy, positions in pos.items():
             for symbol, position in positions.items():
                 symbol = symbol.replace(".SSE", "")
                 format = "%Y-%m-%d %H:%M:%S"

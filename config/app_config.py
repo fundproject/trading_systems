@@ -33,8 +33,22 @@ stage_setting = {
     "授权编码": "",
     "委托类型": "7"
 }
+ctp_prod_setting = {
+    # "用户名": "30010074",
+    # "密码": "199406",
+    "用户名": "71211519",
+    "密码": "681228yxd",
+    # "行情服务器": "58.246.233.226:20421", #实盘行情
+    "行情服务器": "180.168.212.70:41313",  # 实盘行情
+    # "交易服务器": "116.236.247.243:21491", #模拟交易
+    "交易服务器": "180.168.212.70:41305",  # 实盘交易
+    # "行情服务器": "116.236.247.243:21492", #模拟行情
+    "经纪商代码": "8000",
+    "产品名称": "client_vnpytest_2.5",
+    "授权编码": "PRDCTPZAXMUXPDRC",
+}
 
-setting_map = {'prod': prod_setting, 'stage': stage_setting}
+setting_map = {'uft_prod': prod_setting, 'uft_stage': stage_setting, 'ctp_prod': ctp_prod_setting}
 DB_TZ = timezone("Asia/Shanghai")
 rpc_port_map = {'prod': 18818, 'stage': 18820}
 system_configs = {
@@ -42,3 +56,4 @@ system_configs = {
     "cooldown": 5,  # 两次交易之间的冷却时间
     "seconds_for_cancel_all": 50,  # 每分钟超过50秒取消所有order
 }
+
