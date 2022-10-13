@@ -126,6 +126,8 @@ class TradingSystem():
         # manually call merge_and_trade for reset position
         self.engine.merge_and_trade()
 
+    def test_log(self):
+        log_positions(log_config.position_log_path, self.engine)
 
 class MyService(rpyc.Service):
     def exposed_get_position_diff(self):
@@ -133,6 +135,9 @@ class MyService(rpyc.Service):
 
     def exposed_reset_position(self):
         main.reset_position()
+
+    def exposed_test_log(selfself):
+        main.test_log()
 
 
 # start the rpyc server

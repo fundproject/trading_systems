@@ -57,3 +57,4 @@ system_configs = {
     "seconds_for_cancel_all": 50,  # 每分钟超过50秒取消所有order
 }
 
+enabled_underlying = ["510050"]
