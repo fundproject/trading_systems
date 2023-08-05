@@ -5,7 +5,9 @@ import sys
 sys.path.append('C:\\strategies\\')
 import pandas as pd
 import json
+import pickle
 
+tick_column_name = "gateway_name,symbol,exchange,datetime,name,volume,turnover,open_interest,last_price,last_volume,limit_up,limit_down,open_price,high_price,low_price,pre_close,bid_price_1,bid_price_2,bid_price_3,bid_price_4,bid_price_5,ask_price_1,ask_price_2,ask_price_3,ask_price_4,ask_price_5,bid_volume_1,bid_volume_2,bid_volume_3,bid_volume_4,bid_volume_5,ask_volume_1,ask_volume_2,ask_volume_3,ask_volume_4,ask_volume_5,localtime,vt_symbol,id"
 
 def log_trades(outdir, engine):
     outname = datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
@@ -101,22 +103,57 @@ def log_positions(outdir, engine):
     print('log positions')
 
 
+def log_contracts(outdir, engine):
+    outname = datetime.datetime.today().strftime('%Y-%m-%d') + ".txt"
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+    contracts_path = os.path.join(outdir, "contracts_" + outname)
+    with open(contracts_path, 'w') as f:
+        for contract in engine.main_engine.get_all_contracts():
+            f.write("%s\n" % parse_object(contract))
+    print('log contracts')
+
+
 def log_ticks(outdir, engine):
-    symbols = ["510050.SSE"]
-    # symbols = engine.universe
-    for symbol in symbols:
-        result = [str(a) for a in engine.main_engine.get_engine("oms").list if
-                  a.vt_symbol == symbol]
-        today_tick = "\n".join(result)
-        dir = '{}/{}'.format(outdir, symbol)
-        outname = symbol + "_" + datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
-        if not os.path.exists(outdir):
-            os.makedirs(outdir)
-        fullname = os.path.join(dir, outname)
-        f = open(fullname, 'w')
-        f.write(today_tick)
-        f.close()
+    for k in engine.underlying_symbols_map.keys():
+        for symbol in engine.underlying_symbols_map.get(k):
+            result = [parse_object(a) for a in engine.main_engine.get_engine("oms").list if
+                      a.vt_symbol == symbol]
+            today_tick = tick_column_name+"\n"+"\n".join(result)
+            if len(result) > 0:
+                dir = '{}{}'.format(outdir, symbol)
+                outname = symbol + "_" + datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
+                if not os.path.exists(dir):
+                    os.makedirs(dir)
+                fullname = os.path.join(dir, outname)
+                f = open(fullname, 'w')
+                f.write(today_tick)
+                f.close()
+
+    for k in engine.underlying_symbols_map.keys():
+        for symbol in engine.underlying_symbols_map.get(k):
+            result = [parse_object(a) for a in engine.main_engine.get_engine("oms").list if
+                      a.vt_symbol == symbol]
+            today_tick = tick_column_name+"\n"+"\n".join(result)
+            if len(result) > 0:
+                dir = '{}{}'.format(outdir, datetime.datetime.today().strftime('%Y-%m-%d'))
+                outname = symbol + "_" + datetime.datetime.today().strftime('%Y-%m-%d') + ".csv"
+                if not os.path.exists(dir):
+                    os.makedirs(dir)
+                fullname = os.path.join(dir, outname)
+                f = open(fullname, 'w')
+                f.write(today_tick)
+                f.close()
     print("log ticks")
+
+
+def parse_object(object):
+    attributes = object.__dict__
+    # print("log tick ")
+    # print(",".join(str(v) for v in attributes.keys()))
+    line = ",".join(str(v) for v in attributes.values())
+    return line
+
 
 
 def record_variables(strategy, *args, **kwargs):

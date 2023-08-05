@@ -5,12 +5,13 @@ env = "prod"
 with open(r'C:/trading_systems/config/env.txt', 'r') as file:
     env = file.read().rstrip()
 
-running_strategies = ["strategy_wrapper2.py"]  # strategies (wrapper) to be started
-# running_strategies = ["butterfly_spread_wrapper.py"]
+# running_strategies = ["strategy_wrapper2.py"]  # strategies (wrapper) to be started
+# running_strategies = ["option_factor_wrapper.py"]
 # running_strategies = ["doublesell_wrapper.py"]
 # running_strategies = ["strategy_wrapper2.py", "butterfly_spread_wrapper.py", "doublesell_wrapper.py"]
-# running_strategies = ["option_factor_wrapper.py"]
-
+running_strategies = ["option_factor_wrapper.py", "doublesell_wrapper.py"]
+# running_strategies = ["option_test_wrapper.py"]
+#
 prod_setting = {
     "用户名": "300819000012",
     "密码": "199406",
@@ -54,7 +55,9 @@ rpc_port_map = {'prod': 18818, 'stage': 18820}
 system_configs = {
     "trading_min_interval": 1,  # 轮询间隔
     "cooldown": 5,  # 两次交易之间的冷却时间
-    "seconds_for_cancel_all": 50,  # 每分钟超过50秒取消所有order
+    "seconds_for_cancel_all": 55,  # 每分钟超过50秒取消所有order
 }
 
 enabled_underlying = ["510050"]
+
+redis_tick_coloumns = "gateway_name,symbol,exchange,datetime,name,volume,turnover,open_interest,last_price,last_volume,limit_up,limit_down,open_price,high_price,low_price,pre_close,bid_price_1,bid_price_2,bid_price_3,bid_price_4,bid_price_5,ask_price_1,ask_price_2,ask_price_3,ask_price_4,ask_price_5,bid_volume_1,bid_volume_2,bid_volume_3,bid_volume_4,bid_volume_5,ask_volume_1,ask_volume_2,ask_volume_3,ask_volume_4,ask_volume_5,localtime,vt_symbol,id"
